@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AProperty.cs" />
+    <Compile Include="AttributeExtensions.cs" />
     <Compile Include="AutoControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -51,6 +52,7 @@
     </Compile>
     <Compile Include="BooleanProperty.cs" />
     <Compile Include="DisplayNameAttribute.cs" />
+    <Compile Include="EnumProperty.cs" />
     <Compile Include="IntegerProperty.cs" />
     <Compile Include="IProperty.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

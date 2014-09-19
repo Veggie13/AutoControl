@@ -25,8 +25,16 @@ namespace AutoControlLib
                 .FirstOrDefault(item => item.Attr.DisplayName.Equals(displayName)).Prop;
             MethodInfo getMethod = prop.GetGetMethod();
             MethodInfo setMethod = prop.GetSetMethod();
-            Getter = (PropertyGetter<T>)Delegate.CreateDelegate(typeof(PropertyGetter<T>), obj, getMethod);
-            Setter = (PropertySetter<T>)Delegate.CreateDelegate(typeof(PropertySetter<T>), obj, setMethod);
+            if (prop.PropertyType.IsEnum)
+            {
+                Getter = () => (T)getMethod.Invoke(obj, new object[0]);
+                Setter = t => { setMethod.Invoke(obj, new object[] { t }); };
+            }
+            else
+            {
+                Getter = (PropertyGetter<T>)Delegate.CreateDelegate(typeof(PropertyGetter<T>), obj, getMethod);
+                Setter = (PropertySetter<T>)Delegate.CreateDelegate(typeof(PropertySetter<T>), obj, setMethod);
+            }
         }
 
         public PropertyGetter<T> Getter { get; private set; }

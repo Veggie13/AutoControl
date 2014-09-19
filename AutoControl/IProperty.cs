@@ -39,6 +39,10 @@ namespace AutoControlLib
             {
                 return new BooleanProperty(me, displayName);
             }
+            if (propType.IsEnum)
+            {
+                return new EnumProperty(me, propType, displayName);
+            }
 
             throw new NotSupportedException("Property type not supported.");
         }

@@ -62,7 +62,7 @@ namespace Test
         {
             _auto.Commit();
             string msg = string.Format("Name: {1}, {0}\nAge: {2}\n{3}",
-                _data.FirstName, _data.LastName, _data.Age, _data.LikesCheese ? "They like cheese." : "They don't like cheese.");
+                _data.FirstName, _data.LastName, _data.Age, _data.LikesCheese ? string.Format("They like {0}.", _data.FaveCheese.GetDisplayNameAttribute().DisplayName) : "They don't like cheese.");
             MessageBox.Show(msg);
         }
     }
@@ -92,6 +92,20 @@ namespace Test
 
         [AutoControlLib.DisplayName("Likes cheese")]
         public bool LikesCheese
+        {
+            get;
+            set;
+        }
+
+        public enum CheeseType
+        {
+            [AutoControlLib.DisplayName("Swiss Cheese")] Swiss,
+            [AutoControlLib.DisplayName("Mozzarella Cheese")] Mozza,
+            [AutoControlLib.DisplayName("Cheddar Cheese")] Cheddar
+        }
+
+        [AutoControlLib.DisplayName("Favourite cheese")]
+        public CheeseType FaveCheese
         {
             get;
             set;
